@@ -20,7 +20,7 @@ public extension RawRepresentable where RawValue == Int {
         return AnySequence { generator }
     }
     
-    /**
+    /** 
      Returns the count of all the possible values of self, starting in value.
      
      - parameter startingAt: The value from which to start.
