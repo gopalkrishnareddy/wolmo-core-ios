@@ -10,7 +10,6 @@ import AVFoundation
 import ReactiveCocoa
 import Result
 
-
 public extension AVAsset {
     
     /**

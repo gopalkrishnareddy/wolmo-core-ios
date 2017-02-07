@@ -14,8 +14,7 @@ import Core
 
 public class UIAlertControllerSpec: QuickSpec {
     
-    override public func spec() {
-        
+    override public func spec() {   //swiftlint:disable:this function_body_length
         
         describe("#init") {
             

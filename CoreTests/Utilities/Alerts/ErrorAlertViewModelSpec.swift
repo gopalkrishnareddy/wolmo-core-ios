@@ -14,7 +14,7 @@ import Core
 
 public class ErrorAlertViewModelSpec: QuickSpec {
     
-    override public func spec() {
+    override public func spec() {   //swiftlint:disable:this function_body_length
         
         var defaultErrorAlertViewModel: ErrorAlertViewModel!
         

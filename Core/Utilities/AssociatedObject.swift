@@ -10,8 +10,8 @@
  Sets an associated value for a given object using a given key and association policy, whether it is a value type or a class.
  
  - parameter object: The source object for the association.
- - parameter value: The value to associate with the key for object.
  - parameter key: The key for the association.
+ - parameter value: The value to associate with the key for object.
  - parameter policy: The policy for the association.
  
  - note: It uses the objc runtime through objc_setAssociatedObject, but wraps the value if it is a struct.

@@ -14,8 +14,7 @@ import Core
 
 public class ArraySpec: QuickSpec {
     
-    override public func spec() {
-        
+    override public func spec() {   //swiftlint:disable:this function_body_length
         
         describe("#groupBy") {
             

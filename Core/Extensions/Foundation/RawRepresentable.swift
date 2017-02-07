@@ -45,9 +45,13 @@ public struct RawRepresentableGenerator<RawValue, Representable: RawRepresentabl
     private let _valueSuccessor: Representable -> Representable?
     private var _nextValue: Representable?
     
-    
     /**
      Provides a baseRawValue and a function to get a new RawValue.
+     
+     - Parameters:
+        - baseValue: first value to generate.
+        - valueSuccessor: function that given a value, provides the next one,
+            or .None if there isn't a next one.
      */
     public init(startingAt baseValue: Representable, valueSuccessor: Representable -> Representable?) {
         _nextValue = baseValue

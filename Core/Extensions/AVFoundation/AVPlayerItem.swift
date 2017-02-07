@@ -17,6 +17,9 @@ public extension AVPlayerItem {
      
      - parameter time: The time to which to seek.
      
+     - returns: A SignalProducer that send true if it succedeed,
+            or false if not.
+     
      - seealso: seekToTime(time, completionHandler)
      */
     public func seekTo(time: CMTime) -> SignalProducer<Bool, NoError> {

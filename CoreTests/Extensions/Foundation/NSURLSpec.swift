@@ -14,7 +14,7 @@ import Core
 
 public class NSURLSpec: QuickSpec {
     
-    override public func spec() {
+    override public func spec() {   //swiftlint:disable:this function_body_length
         
         let remoteURL = NSURL(string: "https://www.google.com.ar")!
         

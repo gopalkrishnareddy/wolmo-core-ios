@@ -94,6 +94,10 @@ public extension NSDate {
     /**
      Creates a Date from a day, month and year.
      
+     - parameters:
+        - day: Day of month
+        - month: Month of year
+        - year: Year
      - seealso: init(dateString: String)
      */
     convenience init?(day: Int, month: Int, year: Int) {
@@ -120,6 +124,7 @@ public extension NSDate {
     /**
      Returns a new date that is set to a given number of days relative to the date.
      
+     - parameter days: Quantity of days to add to self.
      - seealso: dateByAddingTimeInterval()
      */
     public func adding(days days: Int) -> NSDate {
@@ -130,6 +135,7 @@ public extension NSDate {
     /**
      Returns a new date that is set to a given number of hours relative to the date.
      
+     - parameter hours: Quantity of hours to add to self.
      - seealso: dateByAddingTimeInterval()
      */
     public func adding(hours hours: Int) -> NSDate {

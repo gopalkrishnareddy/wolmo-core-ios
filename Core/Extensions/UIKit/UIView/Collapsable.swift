@@ -41,9 +41,9 @@ extension Collapsable where Self: UIView {
      
      - Warning: It is intended to be used to collapse a view *without* subviews.
      
-     - Parameter view: The view to collapse
-     - Parameter animated: Indicates if the collapse should be animated.
-     - Parameter animationDuration: The animationDuration of the collapse.
+     - Parameters:
+        - animated: Indicates if the collapse should be animated.
+        - animationDuration: The animationDuration of the collapse.
      */
     public func collapse(animated: Bool = true, animationDuration: NSTimeInterval = 1) {
         if let previousHeightConstraint = previousHeightConstraint {
@@ -52,7 +52,18 @@ extension Collapsable where Self: UIView {
             previousHeightConstraint.constant = 0
         } else {
             // We create a new height constraint with constant 0
-            let zeroheightConstraint = heightAnchor.constraintEqualToConstant(0)
+            let zeroheightConstraint: NSLayoutConstraint
+            if #available(iOS 9.0, *) {
+                zeroheightConstraint = heightAnchor.constraintEqualToConstant(0)
+            } else {
+                zeroheightConstraint = NSLayoutConstraint(item: self,
+                                                          attribute: .Height,
+                                                          relatedBy: .Equal,
+                                                          toItem: .None,
+                                                          attribute: .Height,
+                                                          multiplier: 0.0,
+                                                          constant: 0.0)
+            }
             zeroheightConstraint.active = true
         }
         
@@ -62,11 +73,11 @@ extension Collapsable where Self: UIView {
     /**
      Uncollapse a view by removing/modifying constraint height. It works also if they view already has a constraint.
      
-     **Warning:** It is intended to be used to uncollapse a view *without* subviews.
+     - Warning: It is intended to be used to uncollapse a view *without* subviews.
      
-     - Parameter view: The view to collapse
-     - Parameter animated: Indicates if the collapse should be animated.
-     - Parameter animationDuration: The animationDuration of the collapse.
+     - Parameters:
+        - animated: Indicates if the collapse should be animated.
+        - animationDuration: The animationDuration of the collapse.
      */
     public func uncollapse(animated: Bool = true, animationDuration: NSTimeInterval = 1) {
         if let heightConstraint = previousHeightConstraint {

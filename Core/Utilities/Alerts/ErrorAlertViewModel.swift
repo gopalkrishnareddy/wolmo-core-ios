@@ -16,7 +16,7 @@ public struct ErrorAlertViewModel {
     public let title: String
     public let message: String
     public let dismissButtonTitle: String
-    public let dismissAction: ErrorAlertViewModel -> ()
+    public let dismissAction: ErrorAlertViewModel -> Void
     
     /**
      Initialize a new ErrorAlertViewModel with the provided parameters.
@@ -26,11 +26,12 @@ public struct ErrorAlertViewModel {
      - parameter dismissButtonTitle: The dismiss button title.
      - parameter dismissAction: The dismiss button action.
      */
+    @available(iOS 9.0, *)
     public init(
         title: String,
         message: String,
-        dismissButtonTitle: String = DefaultDismissButtonTitleKey.localized().localizedCapitalizedString,
-        dismissAction: ErrorAlertViewModel -> () = { _ in }) {
+        dismissButtonTitle: String = DefaultDismissButtonTitleValue,
+        dismissAction: ErrorAlertViewModel -> Void = { _ in }) {
         self.title = title
         self.message = message
         self.dismissAction = dismissAction
@@ -43,4 +44,12 @@ public struct ErrorAlertViewModel {
      - seealso: Localizable.String
      */
     public static var DefaultDismissButtonTitleKey: String = "error-alert-view.dismiss.title"
+    
+    private static var DefaultDismissButtonTitleValue: String = {
+        if #available(iOS 9.0, *) {
+            return DefaultDismissButtonTitleKey.localized().localizedCapitalizedString
+        } else {
+            return DefaultDismissButtonTitleKey.localized()
+        }
+    }()
 }

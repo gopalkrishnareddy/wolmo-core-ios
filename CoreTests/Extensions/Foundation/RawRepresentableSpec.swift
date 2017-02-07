@@ -21,7 +21,7 @@ private enum IntRepresentable: Int {
 
 public class RawRepresentableSpec: QuickSpec {
     
-    override public func spec() {
+    override public func spec() {   //swiftlint:disable:this function_body_length
         
         describe("#allValues") {
             

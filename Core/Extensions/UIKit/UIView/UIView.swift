@@ -91,24 +91,67 @@ extension UIView {
      Loads the view into the specified containerView.
      
      - warning: It must be done after self's view is loaded.
-     - note: It uses constraints to determine the size, so the frame isn't needed. Because of this, `loadInto()` can be used in viewDidLoad().
-     - parameter containerView: The container view.
-     - parameter viewPositioning: Back or Front. Default: Front
+     - note: It uses constraints to determine the size, so the frame isn't needed. Because of this,
+            `loadInto()` can be used in viewDidLoad().
+     
+     - Parameters:
+        - containerView: The container view.
+        - viewPositioning: Back or Front. Default: Front.
+        - leadingOffset: Distance offset between the container view's leading and self's leading.
+            Default: 0.
+        - trailingOffset: Distance offset between the self's trailing and container view's trailing.
+            Default: 0.
+        - topOffset: Distance offset between the container view's top and self's top.
+            Default: 0.
+        - bottomOffset: Distance offset between the self's bottom and container view's bottom.
+            Default: 0.
      */
-    public func loadInto(containerView: UIView, viewPositioning: ViewPositioning = .Front) {
+    public func loadInto(containerView: UIView,
+                         viewPositioning: ViewPositioning = .Front,
+                         leadingOffset: CGFloat = 0.0,
+                         trailingOffset: CGFloat = 0.0,
+                         topOffset: CGFloat = 0.0,
+                         bottomOffset: CGFloat = 0.0) {
         containerView.addSubview(self)
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
         translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.topAnchor.constraintEqualToAnchor(topAnchor).active = true
-        containerView.bottomAnchor.constraintEqualToAnchor(bottomAnchor).active = true
-        containerView.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-        containerView.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
+        if #available(iOS 9.0, *) {
+            topAnchor.constraintEqualToAnchor(containerView.topAnchor, constant: topOffset).active = true
+            containerView.bottomAnchor.constraintEqualToAnchor(bottomAnchor, constant: bottomOffset).active = true
+            leadingAnchor.constraintEqualToAnchor(containerView.leadingAnchor, constant: leadingOffset).active = true
+            containerView.trailingAnchor.constraintEqualToAnchor(trailingAnchor, constant: trailingOffset).active = true
+        } else {
+            addConstraintsiOS8(containerView, leadingOffset, trailingOffset, topOffset, bottomOffset)
+        }
         
         if case viewPositioning = ViewPositioning.Back {
             containerView.sendSubviewToBack(self)
         }
+    }
+
+}
+
+private extension UIView {
+    
+    private func addConstraintsiOS8(containerView: UIView,
+                                    _ leadingOffset: CGFloat = 0.0,
+                                    _ trailingOffset: CGFloat = 0.0,
+                                    _ topOffset: CGFloat = 0.0,
+                                    _ bottomOffset: CGFloat = 0.0) {
+        addConstraint(NSLayoutConstraint(item: self, attribute: .Top,
+            relatedBy: .Equal, toItem: containerView, attribute: .Top,
+            multiplier: 1.0, constant: topOffset))
+        addConstraint(NSLayoutConstraint(item: containerView, attribute: .Bottom,
+            relatedBy: .Equal, toItem: self, attribute: .Bottom,
+            multiplier: 1.0, constant: bottomOffset))
+        addConstraint(NSLayoutConstraint(item: self, attribute: .Leading,
+            relatedBy: .Equal, toItem: containerView, attribute: .Leading,
+            multiplier: 1.0, constant: leadingOffset))
+        addConstraint(NSLayoutConstraint(item: containerView, attribute: .Trailing,
+            relatedBy: .Equal, toItem: self, attribute: .Trailing,
+            multiplier: 1.0, constant: trailingOffset))
     }
     
 }

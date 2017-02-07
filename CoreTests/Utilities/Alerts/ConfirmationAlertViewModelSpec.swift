@@ -12,10 +12,9 @@ import Quick
 import Nimble
 import Core
 
-// TODO: Implement ConfirmationAlertViewModelSpec
 public class ConfirmationAlertViewModelSpec: QuickSpec {
     
-    override public func spec() {
+    override public func spec() {   //swiftlint:disable:this function_body_length
         
         var defaultConfirmationAlertViewModel: ConfirmationAlertViewModel!
         

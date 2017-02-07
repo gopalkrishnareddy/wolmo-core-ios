@@ -33,10 +33,12 @@ public extension Array {
     
     /**
      Returns a new array with element appended to the Array.
+     - complexity: Amortized O(1) unless self's storage is shared with another live array;
+        O(count) if self does not wrap a bridged NSArray; otherwise the efficiency is unspecified.
      
-     - Complexity: Amortized O(1) unless self's storage is shared with another live array; 
-     O(count) if self does not wrap a bridged NSArray; otherwise the efficiency is unspecified.
+     - parameter element: New element to add at the end.
      - seealso: append().
+     - returns: A new array of the elements self had and the new element at the end.
     */
     public func appending(element: Element) -> [Element] {
         var result = self
@@ -46,16 +48,17 @@ public extension Array {
     
     /**
      Returns the indexth element.
-     - Complexity:
+     - complexity:
      Reading is O(1). 
      Writing is O(1) unless self's storage is shared with another live array; 
      O(count) if self does not wrap a bridged NSArray; otherwise the efficiency is unspecified..
      
-     - Note: This function should be used over subscript when we don't want a runtime error when indexth element doesn't exist.
-     - Warning: Returns .None if the index is out of bound.
-     - seealso: subcript()
+     - parameter index: Index of the element to retrieve.
+     - note: This function should be used over subscript when we don't want a runtime error when indexth element doesn't exist.
+     - warning: Returns .None if the index is out of bound.
      - returns: The Element or nil if the array doesn't contain an element in 
         that index
+     - seealso: subcript()
      */
     public func get(index: Int) -> Element? {
         return indices ~= index ? self[index] : nil

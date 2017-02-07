@@ -62,6 +62,9 @@ public extension String {
     
     /**
      Checks if a string is a valid email or not.
+     
+     - returns: True is self is a valid email
+        or false if not.
     */
     public func isValidEmail() -> Bool {
         let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
@@ -71,7 +74,7 @@ public extension String {
     }
     
     /*
-     Removes leading and trailing whitespaces.
+     String with leading and trailing whitespaces removed.
      */
     public var trimmed: String {
         return stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())

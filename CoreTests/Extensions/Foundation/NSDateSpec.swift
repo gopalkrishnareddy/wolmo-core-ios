@@ -39,7 +39,7 @@ private let week: [NSDate] = {
 
 public class NSDateSpec: QuickSpec {
     
-    override public func spec() {
+    override public func spec() {   //swiftlint:disable:this function_body_length
         
         describe("#init") {
             
@@ -219,7 +219,6 @@ public class NSDateSpec: QuickSpec {
                     expect(date == _date).to(beFalse())
                 }
             }
-            
             
         }
     }

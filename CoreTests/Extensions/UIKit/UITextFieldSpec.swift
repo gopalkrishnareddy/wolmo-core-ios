@@ -14,7 +14,7 @@ import Core
 
 public class UITextFieldSpec: QuickSpec {
     
-    override public func spec() {
+    override public func spec() {   //swiftlint:disable:this function_body_length
 
         describe("#next") {
             

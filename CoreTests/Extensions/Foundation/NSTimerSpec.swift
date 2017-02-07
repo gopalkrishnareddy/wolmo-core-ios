@@ -25,7 +25,6 @@ public class NSTimerSpec: QuickSpec {
         
         describe("#schedule(delay:)") {
             
-            
             it("should trigger handler after delay") { waitUntil(timeout: 2) { done in
                 timer = NSTimer.schedule(1) { _ in
                     done()

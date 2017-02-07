@@ -33,8 +33,7 @@ private var key: Int = 0
 
 public class AssociatedObjectSpec: QuickSpec {
     
-    
-    override public func spec() {
+    override public func spec() {   //swiftlint:disable:this function_body_length
         
         var associatableObject: AssociatableObjectClassMock! // It has to be an AnyObject (AKA: class)
         
@@ -49,7 +48,7 @@ public class AssociatedObjectSpec: QuickSpec {
         }
         
         afterEach {
-            setAssociatedObject(associatableObject, key: &key, value: Optional<Int>.None)
+            setAssociatedObject(associatableObject, key: &key, value: Int?.None)
         }
         
         describe("setAssociatedObject") {

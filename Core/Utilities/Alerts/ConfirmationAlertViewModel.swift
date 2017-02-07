@@ -17,8 +17,8 @@ public struct ConfirmationAlertViewModel {
     public let message: String
     public let dismissButtonTitle: String
     public let confirmButtonTitle: String
-    public let dismissAction: ConfirmationAlertViewModel -> ()
-    public let confirmAction: ConfirmationAlertViewModel -> ()
+    public let dismissAction: ConfirmationAlertViewModel -> Void
+    public let confirmAction: ConfirmationAlertViewModel -> Void
     
     /**
      Initialize a new ConfirmationAlertViewModel with the provided parameters.
@@ -36,10 +36,10 @@ public struct ConfirmationAlertViewModel {
     public init(
         title: String,
         message: String,
-        dismissButtonTitle: String = DefaultDismissButtonTitleKey.localized().localizedCapitalizedString,
-        dismissAction: ConfirmationAlertViewModel -> () = { _ in },
-        confirmButtonTitle: String = DefaultConfirmButtonTitleKey.localized().localizedCapitalizedString,
-        confirmAction: ConfirmationAlertViewModel -> () = { _ in }) {
+        dismissButtonTitle: String = DefaultDismissButtonTitleValue,
+        dismissAction: ConfirmationAlertViewModel -> Void = { _ in },
+        confirmButtonTitle: String = DefaultConfirmButtonTitleValue,
+        confirmAction: ConfirmationAlertViewModel -> Void = { _ in }) {
         self.title = title
         self.message = message
         self.confirmAction = confirmAction
@@ -55,10 +55,26 @@ public struct ConfirmationAlertViewModel {
      */
     public static var DefaultConfirmButtonTitleKey: String = "confirmation-alert-view.dismiss.title"
     
+    private static var DefaultConfirmButtonTitleValue: String = {
+        if #available(iOS 9.0, *) {
+            return DefaultConfirmButtonTitleKey.localized().localizedCapitalizedString
+        } else {
+            return DefaultConfirmButtonTitleKey.localized()
+        }
+    }()
+    
     /**
      Default title key for dismiss button. It will fetch the localized value from the corresponding Localizable.String.
      You can provide a different key by changing this property.
      - seealso: Localizable.String
      */
     public static var DefaultDismissButtonTitleKey: String = "confirmation-alert-view.confirm.title"
+    
+    private static var DefaultDismissButtonTitleValue: String = {
+        if #available(iOS 9.0, *) {
+            return DefaultDismissButtonTitleKey.localized().localizedCapitalizedString
+        } else {
+            return DefaultDismissButtonTitleKey.localized()
+        }
+    }()
 }

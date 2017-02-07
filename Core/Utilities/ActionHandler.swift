@@ -20,8 +20,8 @@ extension ActionHandlerType where Self: UIControl {
     /**
      Sets the action passed by parameter to the specified events.
      
-     - Parameter event: Control events for which the action is registered. TouchUpInside is default.
-     - Parameter action: Closure that receives the UIControl and the UIEvent.
+     - parameter events: Control events for which the action is registered. TouchUpInside is default.
+     - parameter action: Closure that receives the UIControl and the UIEvent.
      
      - note: It retains any object used in the closure.
      */
