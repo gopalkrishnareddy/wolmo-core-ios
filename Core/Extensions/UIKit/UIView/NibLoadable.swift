@@ -13,11 +13,13 @@ import Foundation
  */
 public protocol NibLoadable: class {
     
-    static func loadFromNib(bundle: NSBundle) -> Self?
+    //Using generics since using Self doesn't let us use default implementations
+    // for non-final classes.
+    static func loadFromNib<T>(bundle: NSBundle) -> T?
     
 }
 
-extension NibLoadable where Self: UIView {
+public extension NibLoadable where Self: UIView {
     
     /**
         Loads the nib for the specific view , it will use the view name as the xib name.
@@ -25,8 +27,9 @@ extension NibLoadable where Self: UIView {
         - parameter bundle: Specific bundle, default = bundle for the class.
         - returns: The loaded UIView
     */
-    public static func loadFromNib(bundle: NSBundle = NSBundle(forClass: Self.self)) -> Self? {
-        let nibName = NSStringFromClass(self).componentsSeparatedByString(".").last
-        return nibName.flatMap(bundle.loadNib)
+    public static func loadFromNib<T>(bundle: NSBundle = NSBundle(forClass: Self.self)) -> T? {
+        let nibName = String(self)
+        return bundle.loadNib(nibName)
     }
+    
 }
