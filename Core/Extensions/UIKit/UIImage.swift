@@ -10,7 +10,7 @@ import UIKit
 
 public extension UIImage {
     
-    func resizedImage(_ wantedSize: CGSize, cornerRadius: CGFloat = 0.0) -> UIImage {
+    public func resizedTo(_ wantedSize: CGSize, cornerRadius: CGFloat = 0.0) -> UIImage {
         let newSize = size.resizedMaintainingRatio(wantedSize: wantedSize)
         
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
@@ -29,9 +29,9 @@ public extension UIImage {
 
 }
 
-private extension CGSize {
+fileprivate extension CGSize {
 
-    func resizedMaintainingRatio(wantedSize: CGSize) -> CGSize {
+    fileprivate func resizedMaintainingRatio(wantedSize: CGSize) -> CGSize {
         let widthFactor = width / wantedSize.width
         let heightFactor = height / wantedSize.height
         let resizeFactor = height > width ? heightFactor : widthFactor
