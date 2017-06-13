@@ -13,6 +13,8 @@
 		9D896AEC1CDE642F008B0E5F /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D896AEA1CDE642F008B0E5F /* Quick.framework */; };
 		9D896AEE1CDE64FF008B0E5F /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D896AE91CDE642F008B0E5F /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D896AEF1CDE64FF008B0E5F /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D896AEA1CDE642F008B0E5F /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B82058CD1EEF33950002D7D4 /* UIImageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82058CC1EEF33950002D7D4 /* UIImageSpec.swift */; };
+		B82058D01EEF3A040002D7D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B82058CE1EEF39230002D7D4 /* Assets.xcassets */; };
 		B8CF9A8C1EE9EF6E0063F951 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF9A8B1EE9EF6E0063F951 /* UIImage.swift */; };
 		B95948031D3E78FD003A082F /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B95948021D3E78FD003A082F /* MBProgressHUD.framework */; };
 		B959481A1D3EA039003A082F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B95948191D3EA039003A082F /* AVFoundation.framework */; };
@@ -123,6 +125,8 @@
 		9D896AC91CDE3EC5008B0E5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D896AE91CDE642F008B0E5F /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		9D896AEA1CDE642F008B0E5F /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		B82058CC1EEF33950002D7D4 /* UIImageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageSpec.swift; sourceTree = "<group>"; };
+		B82058CE1EEF39230002D7D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = CoreTests/Resources/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		B8CF9A8B1EE9EF6E0063F951 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		B95948021D3E78FD003A082F /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
 		B95948191D3EA039003A082F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -248,6 +252,7 @@
 		9D896ABA1CDE3EC5008B0E5F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B82058CE1EEF39230002D7D4 /* Assets.xcassets */,
 				B988B96D1D24481400824685 /* Utilities */,
 				9D896AD61CDE5EF0008B0E5F /* Extensions */,
 				9D896ABB1CDE3EC5008B0E5F /* Core.h */,
@@ -443,6 +448,7 @@
 				CEE9BFB11E8986D400D0E65D /* UIAlertControllerSpec.swift */,
 				CE11868C1EA7A0E100105D6F /* UICollectionViewSpec.swift */,
 				CEE9BFB21E8986D400D0E65D /* UIColorSpec.swift */,
+				B82058CC1EEF33950002D7D4 /* UIImageSpec.swift */,
 				CE11868A1EA7A0CD00105D6F /* UITableViewSpec.swift */,
 				CEE9BFB31E8986D400D0E65D /* UITextFieldSpec.swift */,
 			);
@@ -569,6 +575,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82058D01EEF3A040002D7D4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +674,7 @@
 				CEE9BFBD1E8986D400D0E65D /* SignalSpec.swift in Sources */,
 				CEE9BFB41E8986D400D0E65D /* ArraySpec.swift in Sources */,
 				CE1186A01EA7CA7900105D6F /* NibLoadableSpec.swift in Sources */,
+				B82058CD1EEF33950002D7D4 /* UIImageSpec.swift in Sources */,
 				CEE9BFB81E8986D400D0E65D /* RawRepresentableSpec.swift in Sources */,
 				CEE9BFC91E8986DC00D0E65D /* ErrorAlertViewModelSpec.swift in Sources */,
 				CEE9BFBE1E8986D400D0E65D /* UIAlertControllerSpec.swift in Sources */,
