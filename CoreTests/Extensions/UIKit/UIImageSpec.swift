@@ -16,8 +16,8 @@ public class UIImageSpec: QuickSpec {
         return image.size.width / image.size.height
     }
     
-    public func hasMatchingHeightOrWidth(sizeOne: CGSize, sizeTwo:CGSize) -> Bool {
-        return (sizeOne.height.rounded() == sizeTwo.height.rounded()) || (sizeOne.width.rounded() == sizeTwo.width.rounded())
+    public func hasMatchingWidth(sizeOne: CGSize, sizeTwo: CGSize) -> Bool {
+        return sizeOne.width.rounded() == sizeTwo.width.rounded()
     }
     
     override public func spec() {
@@ -50,7 +50,7 @@ public class UIImageSpec: QuickSpec {
                         let wantedSize = CGSize(width: 250, height: 346)
                         let resizedImage = originalImage.resizedTo(wantedSize)
                         expect(self.ratio(of: originalImage)).to(equal(self.ratio(of: resizedImage)))
-                        expect(self.hasMatchingHeightOrWidth(sizeOne: resizedImage.size, sizeTwo: wantedSize)).to(beTrue())
+                        expect(self.hasMatchingWidth(sizeOne: resizedImage.size, sizeTwo: wantedSize)).to(beTrue())
                     }
                 }
             }
@@ -73,7 +73,7 @@ public class UIImageSpec: QuickSpec {
                         let wantedSize = CGSize(width: 15, height: 29)
                         let resizedImage = originalImage.resizedTo(wantedSize)
                         expect(self.ratio(of: originalImage)).to(equal(self.ratio(of: resizedImage)))
-                        expect(self.hasMatchingHeightOrWidth(sizeOne: resizedImage.size, sizeTwo: wantedSize)).to(beTrue())
+                        expect(self.hasMatchingWidth(sizeOne: resizedImage.size, sizeTwo: wantedSize)).to(beTrue())
                     }
                 }
             }

@@ -19,7 +19,7 @@ public extension UIImage {
         Set to true if you want to make the size relative to the scale of the screen 
             (So the resized image looks the same relative size on all devices, you probably want this if you're showing the resized image).
         Set to false if you want the size to be actual pixels 
-            (This is useful to generate a resized image of a particular size in real pixels to send to API regardless of the device).
+            (This is useful to generate a resized image of a particular size in real pixels to send to API regardless of the device screen scale).
      - parameter cornerRadius: The cornerRadius to be used. Any number lower or equal to zero will not add cornerRadius. Default: 0.0
      
      */
