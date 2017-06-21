@@ -11,35 +11,63 @@ import UIKit
 public extension UIImage {
     
     /**
-     Returns a resized copy of the image maintaining it's aspect ratio, with cornerRadius if used.
+     Returns a resized copy of the image, with cornerRadius if used.
      
-     - parameter wantedSize: The wanted size to fit the new image in.
-        Note that the size of the resulting image will be the closest size to the one specified that maintains the aspect ratio of the original image.
+     - parameter toSize: The wanted size to fit the new image in.
+     - parameter maintainAspectRatio: Determines if the resulting image will keep the aspect ratio of the original image, 
+            If set to true the size of the resulting image will be the closest size to the one specified that maintains the aspect ratio of the original image.
+            If set to false it will stretch the image to fill the size specified.
      - parameter useScreenScale: Determines if the screen scale will be used when creating the image context. Default: true.
         Set to true if you want to make the size relative to the scale of the screen 
             (So the resized image looks the same relative size on all devices, you probably want this if you're showing the resized image).
         Set to false if you want the size to be actual pixels 
             (This is useful to generate a resized image of a particular size in real pixels to send to API regardless of the device screen scale).
-     - parameter cornerRadius: The cornerRadius to be used. Any number lower or equal to zero will not add cornerRadius. Default: 0.0
+     - parameter cornerRadius: The cornerRadius to be used. Any number lower or equal to zero will not add cornerRadius. Default: 0.0, no corner radius.
      
      */
     
-    public func resizedTo(_ wantedSize: CGSize, useScreenScale: Bool = true, cornerRadius: CGFloat = 0.0) -> UIImage {
-        let newSize = size.resizedMaintainingRatio(wantedSize: wantedSize)
+    public func resized(toSize: CGSize, maintainAspectRatio: Bool, useScreenScale: Bool = true, cornerRadius: CGFloat = 0.0) -> UIImage {
+        let newSize = maintainAspectRatio ? size.resizedMaintainingRatio(wantedSize: toSize) : toSize
         let scale: CGFloat = useScreenScale ? 0.0 : 1.0
+        let imageRect = CGRect(origin: CGPoint.zero, size: newSize)
         
         UIGraphicsBeginImageContextWithOptions(newSize, false, scale)
         if cornerRadius > 0 {
-            let path = UIBezierPath(
-                        roundedRect:CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height),
-                        cornerRadius: cornerRadius)
+            let path = UIBezierPath(roundedRect:imageRect, cornerRadius: cornerRadius)
             path.addClip()
         }
-        draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        resizableImage(withCapInsets: capInsets).draw(in: imageRect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
         return newImage
+    }
+    
+    /**
+     Returns a resized copy of the image. In case that the new size is smaller it will crop it, 
+        in case that it is bigger it will replicate it to fill the desired size, ignoring the points specified by capInsets.
+     
+     - parameter toSize: The wanted size of the new image.
+     - parameter capInsets: UIEdgeInsets specifies how many points in each direction to ignore when replicating the image.
+            See https://www.natashatherobot.com/ios-stretchable-button-uiedgeinsetsmake/ for some examples.
+    */
+    
+    public func resized(toSize: CGSize, withCapInsets capInsets: UIEdgeInsets) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(toSize, false, 0.0)
+        resizableImage(withCapInsets: capInsets).draw(in: CGRect(origin: CGPoint.zero, size: toSize))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
+    /**
+     Returns the aspect ratio of the image represented by a CGFloat. 
+        For example an image with a 4:3 ratio will give 1.333... as output.
+     */
+    
+    public var aspectRatio: CGFloat {
+        return size.width / size.height
     }
 
 }
@@ -57,7 +85,7 @@ fileprivate extension CGSize {
     fileprivate func resizedMaintainingRatio(wantedSize: CGSize) -> CGSize {
         let widthFactor = width / wantedSize.width
         let heightFactor = height / wantedSize.height
-        let resizeFactor = height > width ? heightFactor : widthFactor
+        let resizeFactor = wantedSize.height < wantedSize.width ? heightFactor : widthFactor
         
         return CGSize(width: width / resizeFactor, height: height / resizeFactor)
     }
