@@ -33,7 +33,7 @@ public extension UIImage {
         
         UIGraphicsBeginImageContextWithOptions(newSize, false, scale)
         if cornerRadius > 0 {
-            let path = UIBezierPath(roundedRect:imageRect, cornerRadius: cornerRadius)
+            let path = UIBezierPath(roundedRect: imageRect, cornerRadius: cornerRadius)
             path.addClip()
         }
         draw(in: imageRect)
