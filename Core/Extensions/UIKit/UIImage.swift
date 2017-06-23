@@ -15,7 +15,7 @@ public extension UIImage {
      
      - parameter toSize: The wanted size to fit the new image in.
      - parameter maintainAspectRatio: Determines if the resulting image will keep the aspect ratio of the original image, 
-            If set to true the size of the resulting image will be the closest size to the one specified that maintains the aspect ratio of the original image.
+            If set to true the size of the resulting image will be the closest smaller size to the one specified that maintains the aspect ratio of the original image.
             If set to false it will stretch the image to fill the size specified.
      - parameter useScreenScale: Determines if the screen scale will be used when creating the image context. Default: true.
         Set to true if you want to make the size relative to the scale of the screen 
@@ -36,7 +36,7 @@ public extension UIImage {
             let path = UIBezierPath(roundedRect:imageRect, cornerRadius: cornerRadius)
             path.addClip()
         }
-        resizableImage(withCapInsets: capInsets).draw(in: imageRect)
+        draw(in: imageRect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
@@ -78,16 +78,16 @@ fileprivate extension CGSize {
      Returns a resized copy of the size maintaining it's aspect ratio.
      
      - parameter wantedSize: The wanted new size to fit.
-     Note that the size of the resulting CGSize will be the closest to the one specified that maintains the aspect ratio of the original.
+     Note that the size of the resulting CGSize will be the smaller closest size to the one specified that maintains the aspect ratio of the original.
      
      */
     
     fileprivate func resizedMaintainingRatio(wantedSize: CGSize) -> CGSize {
-        let widthFactor = width / wantedSize.width
-        let heightFactor = height / wantedSize.height
-        let resizeFactor = wantedSize.height < wantedSize.width ? heightFactor : widthFactor
+        let widthFactor = wantedSize.width / width
+        let heightFactor = wantedSize.height / height
+        let resizeFactor = min(heightFactor, widthFactor)
         
-        return CGSize(width: width / resizeFactor, height: height / resizeFactor)
+        return CGSize(width: width * resizeFactor, height: height * resizeFactor)
     }
     
 }
